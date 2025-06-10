@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Herramientas Financieras Gratis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2em;
+      background: #f0f4f8;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #00529b;
+    }
+    input, button {
+      padding: 0.7em;
+      margin-top: 1em;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      background: #00529b;
+      color: white;
+      cursor: pointer;
+    }
+    .download-link {
+      margin-top: 2em;
+      text-align: center;
+    }
+    .whatsapp {
+      display: block;
+      margin-top: 2em;
+      text-align: center;
+    }
+    .whatsapp a {
+      background-color: #25d366;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>¡Bienvenido!</h1>
+    <p>Gracias por tu interés. Aquí puedes descargar dos herramientas financieras gratuitas:</p>
+
+    <div class="download-link">
+      <a href="https://1drv.ms/b/c/9fc78252a6e961e2/EXYJgQwtQohMvnIoKvZTsJoBhGOUhQUEFvLefocXxdpaeg?e=ENKN8E" target="_blank" download>
+        📘 Descargar libro de finanzas personales (PDF)
+      </a>
+    </div>
+
+    <h2>📊 Descarga tu Excel de presupuesto</h2>
+    <form id="excelForm">
+      <label>Nombre completo</label>
+      <input type="text" name="nombre" required />
+
+      <label>Teléfono</label>
+      <input type="tel" name="telefono" required pattern="[0-9]{10,}" />
+
+      <button type="submit">Obtener archivo Excel</button>
+    </form>
+
+    <div id="excelLink" style="display:none; margin-top: 1em;">
+      <a href="Presupuesto-Mensual app.xlsx" download>📥 Descargar Excel de presupuesto</a>
+    </div>
+
+    <div class="whatsapp">
+      <p>¿Tienes dudas? Escríbeme:</p>
+      <a href="http://wa.me/526141964751" target="_blank">📱 Contactar por WhatsApp</a>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("excelForm");
+    const link = document.getElementById("excelLink");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const nombre = form.nombre.value;
+      const telefono = form.telefono.value;
+
+      // Crear CSV temporal para descarga local
+      const csvContent = "data:text/csv;charset=utf-8," + "Nombre,Teléfono\n" + `"${nombre}","${telefono}"`;
+      const encodedUri = encodeURI(csvContent);
+      const tempLink = document.createElement("a");
+      tempLink.setAttribute("href", encodedUri);
+      tempLink.setAttribute("download", "registro_presupuesto.csv");
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+
+      // Mostrar el link del Excel
+      link.style.display = "block";
+    });
+  </script>
+</body>
+</html>
